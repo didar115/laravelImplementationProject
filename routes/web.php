@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DidarController;
-
+use App\Http\Controllers\DashboardController;
+use Illuminate\Routing\RouteAction;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ use App\Http\Controllers\DidarController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Route::get('list', [DidarController::class, 'index'])->name('list');
 Route::get('add', [DidarController::class, 'create'])->name('add');

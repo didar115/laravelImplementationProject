@@ -5,7 +5,7 @@
 @section('content')
 
 
-    <div class="container mt-3">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <form action=" {{ !empty(Session::get('info')) ? url('update/' . Session::get('info.id')) : url('store') }}"

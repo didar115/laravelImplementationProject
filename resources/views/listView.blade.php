@@ -3,9 +3,9 @@
 
 @section('content')
 
-    <div class="container mt-3">
+    <div class="container-fluid">
         <table class="table">
-            <a href="{{ url('add') }}" class="btn btn-danger ">Add student</a>
+            <a href="{{ url('add') }}" class="btn btn-danger mb-3">Add student</a>
 
             @if (session('success'))
                 <div class="alert mt-3 alert-success alert-dismissible fade show" role="alert">
