@@ -8,7 +8,8 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <form action=" {{ !empty(Session::get('info')) ? url('update/' . Session::get('info.id')) : url('store') }}"
+                <form class="needs-validation"
+                    action=" {{ !empty(Session::get('info')) ? url('update/' . Session::get('info.id')) : url('store') }}"
                     method="POST">
                     @csrf
                     <div class="mb-3">
@@ -18,7 +19,7 @@
                             class="form-control">
 
                         @error('name')
-                            <div class="alert-danger">{{ $message }}</div>
+                            <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
@@ -27,7 +28,7 @@
                             value="{{ Session::get('info.class') ? Session::get('info.class') : old('class') }}""
                             name="class" class="form-control">
                         @error('class')
-                            <div class="alert-danger">{{ $message }}</div>
+                            <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
                         @enderror
 
 
@@ -39,7 +40,7 @@
                             value="{{ Session::get('info.roll') ? Session::get('info.roll') : old('roll') }}" name="roll"
                             class="form-control">
                         @error('roll')
-                            <div class="alert-danger">{{ $message }}</div>
+                            <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
                         @enderror
 
                     </div>
