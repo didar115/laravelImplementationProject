@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Didar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\CreateValidationRequest;
 
 class DidarController extends Controller
 {
@@ -13,6 +14,8 @@ class DidarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
           $data= Didar::all();
@@ -26,8 +29,10 @@ class DidarController extends Controller
         return view('addStudent');
     }
 
-    public function store(Request $request)
+    public function store(CreateValidationRequest $request)
     {
+
+        $request->validated();
         $data =new Didar();
 
         $data->name = $request->name;
@@ -46,7 +51,7 @@ class DidarController extends Controller
 
     }
 
-    public function update(Request $request,$id)
+    public function update(CreateValidationRequest $request,$id)
 
     {
         $data = Didar::where('id', '=', $id)->first();
@@ -54,6 +59,8 @@ class DidarController extends Controller
         $data->name = $request->get('name');
         $data->class = $request->get('class');
         $data->roll = $request->get('roll');
+
+        $request->validated();
 
         $data->update();
         return redirect('list')->with('success','Data updated succesfully');

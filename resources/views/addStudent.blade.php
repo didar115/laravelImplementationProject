@@ -14,18 +14,34 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name</label>
                         <input type="text" name="name"
-                            value="{{ Session::get('info.name') ? Session::get('info.name') : '' }}" class="form-control">
+                            value="{{ Session::get('info.name') ? Session::get('info.name') : old('name') }}"
+                            class="form-control">
+
+                        @error('name')
+                            <div class="alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Class</label>
-                        <input type="text" value="{{ Session::get('info.class') ? Session::get('info.class') : '' }}""
+                        <input type="text"
+                            value="{{ Session::get('info.class') ? Session::get('info.class') : old('class') }}""
                             name="class" class="form-control">
+                        @error('class')
+                            <div class="alert-danger">{{ $message }}</div>
+                        @enderror
+
+
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Roll</label>
-                        <input type="number" value="{{ Session::get('info.roll') ? Session::get('info.roll') : '' }}"
-                            name="roll" class="form-control">
+                        <input type="number"
+                            value="{{ Session::get('info.roll') ? Session::get('info.roll') : old('roll') }}" name="roll"
+                            class="form-control">
+                        @error('roll')
+                            <div class="alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
 
                     <button type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom"
