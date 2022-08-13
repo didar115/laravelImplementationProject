@@ -101,7 +101,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ route('list') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -416,16 +416,7 @@
 
                     <div class="row">
                         @yield('content')
-
-
-
-                        <!-- Pie Chart -->
-
                     </div>
-
-                    <!-- Content Row -->
-
-
                 </div>
                 <!-- /.container-fluid -->
 
