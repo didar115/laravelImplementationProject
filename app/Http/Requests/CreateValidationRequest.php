@@ -25,7 +25,10 @@ class CreateValidationRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'email' => 'required',
             'class'=> 'required',
+            'description'=> 'required',
+            'interest'=> 'required',
             'roll' => 'required| max:6 '
         ];
     }

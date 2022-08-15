@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDidarsTable extends Migration
+class CreateInterestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateDidarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('didars', function (Blueprint $table) {
+        Schema::create('interests', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('class');
-            $table->integer('roll');
-            $table->string('description');
-            $table->string('interest');
+            $table->string('fields');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateDidarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('didars');
+        Schema::dropIfExists('interests');
     }
 }
