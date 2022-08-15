@@ -56,23 +56,86 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">All About yourself</label>
                         <textarea value="{{ Session::get('info.description') ? Session::get('info.description') : old('description') }}"
-                            name="description" class="form-control" rows="3"></textarea>
+                            name="description" class="form-control" rows="3">{{ Session::get('info.description') ? Session::get('info.description') : old('description') }}</textarea>
+
+                        @error('description')
+                            <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Interest</label>
-                        <select class="form-control"
-                            value="{{ Session::get('info.interest') ? Session::get('info.interest') : old('interest[]') }}"
-                            id="multipleSelect" name="interest[]" multiple="multiple">
-                            <option value="1">Reading</option>
-                            <option value="2">Drawing</option>
-                            <option value="3">Travelling</option>
-                            <option value="4">writing</option>
-                            <option value="5">Coding</option>
-                            <option value="6">Playing</option>
-                            <option value="7">Machanics</option>
+                        {{-- @if (Session::get('info.interest'))
+                            @foreach (explode(',', Session::get('info.interest')) as $a)
+                                <select class="form-control" value="{{ old('interest[]') }}" id="multipleSelect"
+                                    name="interest[]" multiple="multiple">
+
+                                    @foreach (explode(',', Session::get('info.interest')) as $a)
+                                        <option value="1" {{ 1 == $a ? 'selected' : 'hidden' }}>Reading</option>
+                                        <option value="2" {{ 2 == $a ? 'selected' : 'hidden' }}>Drawing</option>
+                                        <option value="3" {{ 3 == $a ? 'selected' : 'hidden' }}>Travelling</option>
+                                        <option value="4" {{ 4 == $a ? 'selected' : 'hidden' }}>writing</option>
+                                        <option value="5" {{ 5 == $a ? 'selected' : 'hidden' }}>Coding</option>
+                                        <option value="6" {{ 6 == $a ? 'selected' : 'hidden' }}>Playing</option>
+                                        <option value="7" {{ 7 == $a ? 'selected' : 'hidden' }}>Machanics</option>
+                                    @endforeach
+                                </select>
+                            @endforeach
+                        @elseif(empty(Session::get('info.interest')))
+                            <select class="form-control" value="{{ old('interest[]') }}" id="multipleSelect"
+                                name="interest[]" multiple="multiple">
+                                <option value="1">Reading</option>
+                                <option value="2">Drawing</option>
+                                <option value="3">Travelling</option>
+                                <option value="4">writing</option>
+                                <option value="5">Coding</option>
+                                <option value="6">Playing</option>
+                                <option value="7">Machanics</option>
+                            </select>
+                        @endif --}}
+
+                        {{-- @php
+                            $data = Session::get('interests');
+                            $dt = Session::get('flag');
+                            foreach ($data as $key => $interest) {
+                                 $interest[$key];
+                            }
+                            dd($data, $dt,$interest);
+                        @endphp --}}
+
+
+                        <select class="form-control" value="{{ old('interest[]') }}" id="multipleSelect" name="interest[]"
+                            multiple="multiple">
+                            @if (!empty(Session::get('interests')))
+                                @php
+                                    $data = Session::get('interests');
+                                    $create = Session::get('flag');
+                                @endphp
+                                @foreach ($data as $key => $interest)
+                                    @if (!empty($create))
+                                
+                                        {{ $interestData[$key] = $interest['fields'] }}
+                                        <option value="{{ $interestData[$key] }}">{{ $interest['fields'] }}</option>
+                                    @elseif(empty($create))
+                                    {{-- {{  $interest[$key] }} --}}
+                                        {{-- <option value="{{ $key }}" selected>{{ $interest[$key] }}</option> --}}
+                                        
+                                    @endif
+                                    <option value="{{ $key }}" >{{ $interest }}</option>
+                                @endforeach
+                            @else
+                                @php
+                                    // $data = Session::get('interests')
+                                    // $count = count($data[0])
+                                @endphp
+                                @foreach ($data as $interest)
+                                    <option value="{{ $interest }}">{{ $interest }}</option>
+                                @endforeach
+                            @endif
                         </select>
-                        @error('roll')
+
+
+                        @error('interest')
                             <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
                         @enderror
                     </div>

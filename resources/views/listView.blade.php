@@ -22,6 +22,7 @@
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Class</th>
                     <th scope="col">Roll</th>
                     <th scope="col">Action</th>
@@ -32,6 +33,7 @@
                     <tr>
                         <th>{{ $key + 1 }}</th>
                         <td>{{ $item->name }}</td>
+                        <td>{{ $item->email }}</td>
                         <td>{{ $item->class }}</td>
                         <td>{{ $item->roll }}</td>
                         <td>
