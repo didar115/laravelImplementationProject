@@ -78,6 +78,11 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('sbAdmin/css/sb-admin-2.css') }}" rel="stylesheet">
 
+    <!-- WYSIWYG editor-->
+    <script src="https://cdn.tiny.cloud/1/yf9x25wt2kfx3c7neepxrcwdpfygi6qv9kzws32ick9k8itg/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+    @stack('css')
 </head>
 
 <body id="page-top">
@@ -478,7 +483,7 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('sbAdmin/js/sb-admin-2.min.js') }}  "></script>
 
-
+    @stack('script')
 
 
 
