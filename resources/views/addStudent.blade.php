@@ -55,12 +55,15 @@
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">All About yourself</label>
-                        <textarea name="description" class="form-control" rows="3"></textarea>
+                        <textarea value="{{ Session::get('info.description') ? Session::get('info.description') : old('description') }}"
+                            name="description" class="form-control" rows="3"></textarea>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Interest</label>
-                        <select class="form-control" id="multipleSelect" name="interest[]" multiple="multiple">
+                        <select class="form-control"
+                            value="{{ Session::get('info.interest') ? Session::get('info.interest') : old('interest[]') }}"
+                            id="multipleSelect" name="interest[]" multiple="multiple">
                             <option value="1">Reading</option>
                             <option value="2">Drawing</option>
                             <option value="3">Travelling</option>
@@ -77,8 +80,8 @@
                     <button type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom"
                         data-bs-title="Tooltip on bottom"
                         class="btn btn-primary">{{ Session::get('info') ? 'update' : 'Submit' }}</button>
-                    <a href="{{ route('list') }}" class="btn btn-dark">
-                        <-Go Back</a>
+                    <a href="{{ route('list') }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i>
+                        Go Back</a>
                 </form>
             </div>
 
