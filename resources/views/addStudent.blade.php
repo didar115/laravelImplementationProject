@@ -22,6 +22,17 @@
                             <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <input type="email" placeholder="xyz@gmail.com"
+                            value="{{ Session::get('info.email') ? Session::get('info.email') : old('email') }}"
+                            name="email" class="form-control">
+                        @error('email')
+                            <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Class</label>
                         <input type="text"
@@ -30,8 +41,6 @@
                         @error('class')
                             <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
                         @enderror
-
-
                     </div>
 
                     <div class="mb-3">
@@ -42,7 +51,27 @@
                         @error('roll')
                             <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
                         @enderror
+                    </div>
 
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">All About yourself</label>
+                        <textarea name="description" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Interest</label>
+                        <select class="form-control" id="multipleSelect" name="interest[]" multiple="multiple">
+                            <option value="1">Reading</option>
+                            <option value="2">Drawing</option>
+                            <option value="3">Travelling</option>
+                            <option value="4">writing</option>
+                            <option value="5">Coding</option>
+                            <option value="6">Playing</option>
+                            <option value="7">Machanics</option>
+                        </select>
+                        @error('roll')
+                            <div class="alert-danger px-2 mt-2 rounded-2">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <button type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -58,3 +87,30 @@
 
 
 @endsection
+
+
+
+@push('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
+
+@push('script')
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+            toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+            toolbar_mode: 'floating',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#multipleSelect').select2();
+            multiple: true
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@endpush
