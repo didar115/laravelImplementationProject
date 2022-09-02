@@ -29,13 +29,10 @@ class DidarController extends Controller
         Session::forget('info');
         Session::forget('interests');
         $interests= interests::all();
-       foreach($interests as $key=>$interest){
-       
-        $interestData[] =$interest;
-    
-       }
-      
-        Session::put('interests', $interestData);
+        foreach($interests as $key=>$interest){
+            $interestData[] =$interest;
+        }      
+        Session::put('interestAll', $interestData);
         Session::put('flag','flag');
         return view('addStudent');
     }
@@ -43,14 +40,16 @@ class DidarController extends Controller
     public function store(CreateValidationRequest $request)
     {
 
+        // dd($request->all());
+
         $request->validated();
         $data =new Didar();
 
         $data->name = $request->name;
         $data->email = $request->email;
         $data->class = $request->class;
-        $data->description = $request->description;
         $data->roll = $request->roll;
+        $data->description = $request->description;
         $serializedInterest = serialize(array($request->interest));
         $data ->interest=  $serializedInterest;
         // dd($data ->interest);
@@ -63,12 +62,13 @@ class DidarController extends Controller
 
     public function edit($id)
     {
-
+    //    dd(session::all());
         Session::forget('flag');
         $data= Didar::findOrFail($id);
-        $interests= unserialize($data->interest);
+        $editInterests= unserialize($data->interest);
         Session::put('info', $data);
-        Session::put('interests', $interests);
+        Session::put('interestEdit', $editInterests);
+        // Session::put('interestAll');
         return view('addStudent');
 
     }
@@ -76,14 +76,18 @@ class DidarController extends Controller
     public function update(CreateValidationRequest $request,$id)
 
     {
-        dd($request->all());
+        $request->validated();
+        
         $data = Didar::where('id', '=', $id)->first();
 
-        $data->name = $request->get('name');
-        $data->class = $request->get('class');
-        $data->roll = $request->get('roll');
-
-        $request->validated();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->class = $request->class;
+        $data->description = $request->description;
+        $data->roll = $request->roll;
+        $serializedInterest = serialize(array($request->interest));
+        $data ->interest=  $serializedInterest;
+        
 
         $data->update();
         return redirect('list')->with('success','Data updated succesfully');

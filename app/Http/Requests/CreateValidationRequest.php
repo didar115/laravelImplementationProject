@@ -25,7 +25,7 @@ class CreateValidationRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'class'=> 'required',
             'description'=> 'required',
             'interest'=> 'required',
