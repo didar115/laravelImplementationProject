@@ -95,42 +95,44 @@
                         @endif --}}
 
                         {{-- @php
-                            $data = Session::get('interests');
+                            $dataAll = Session::get('interestAll');
+                            $dataEdit = Session::get('interestEdit');
                             $dt = Session::get('flag');
-                            foreach ($data as $key => $interest) {
-                                 $interest[$key];
+                            foreach ($dataEdit as $key => $interest) {
+                                $interest[$key];
                             }
-                            dd($data, $dt,$interest);
+                            dd(count($dataEdit[0]), $dataEdit, $interest[0]=='Cycling');
                         @endphp --}}
 
 
                         <select class="form-control" value="{{ old('interest[]') }}" id="multipleSelect" name="interest[]"
                             multiple="multiple">
-                            @if (!empty(Session::get('interests')))
-                                @php
-                                    $data = Session::get('interests');
-                                    $create = Session::get('flag');
-                                @endphp
-                                @foreach ($data as $key => $interest)
-                                    @if (!empty($create))
+                            @php
+                                $dataAll = Session::get('interestAll');
+                                $dataEdit = Session::get('interestEdit');
                                 
-                                        {{ $interestData[$key] = $interest['fields'] }}
-                                        <option value="{{ $interestData[$key] }}">{{ $interest['fields'] }}</option>
-                                    @elseif(empty($create))
-                                    {{-- {{  $interest[$key] }} --}}
-                                        {{-- <option value="{{ $key }}" selected>{{ $interest[$key] }}</option> --}}
-                                        
-                                    @endif
-                                    <option value="{{ $key }}" >{{ $interest }}</option>
+                                $create = Session::get('flag');
+                            @endphp
+
+                            @if (isset($create))
+                                @foreach ($dataAll as $key => $interest)
+                                    {{ $interest[$key] = $interest['fields'] }}
+                                    <option value="{{ $interest[$key] }}">{{ $interest['fields'] }}</option>
                                 @endforeach
                             @else
-                                @php
-                                    // $data = Session::get('interests')
-                                    // $count = count($data[0])
-                                @endphp
-                                @foreach ($data as $interest)
-                                    <option value="{{ $interest }}">{{ $interest }}</option>
+                                @foreach ($dataEdit[0] as $key => $edit)
+                                    <option value="{{ $dataEdit[0][$key] }}" selected>{{ $dataEdit[0][$key] }}
+                                    </option>
                                 @endforeach
+
+                                @foreach ($dataEdit[0] as $keys => $edit)
+                                    @foreach ($dataAll as $key => $interest)
+                                        @if ($dataEdit[0][$keys] != $interest['fields'])
+                                            <option value="{{ $interest[$key] }}">{{ $interest['fields'] }}</option>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                                {{-- <option value="{{ $key }}" >{{ $interest['fields'] }}</option> --}}
                             @endif
                         </select>
 
